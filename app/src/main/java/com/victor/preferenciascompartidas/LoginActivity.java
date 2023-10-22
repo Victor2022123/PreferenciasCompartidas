@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
 
         } else {
             if (checkBoxRecordar.isChecked())
-                salvarLoginDetalles(email, password);
+                    salvarLoginDetalles(email, password);
                 startHomeActivity();
 
 
