@@ -17,18 +17,19 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailText;
     private EditText passwordText;
     private CheckBox checkBoxRecordar;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        emailText = (EditText)findViewById(R.id.email);
-        passwordText=(EditText) findViewById(R.id.password);
+        emailText = (EditText) findViewById(R.id.email);
+        passwordText = (EditText) findViewById(R.id.password);
         passwordText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
+
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if ( actionId == EditorInfo.IME_NULL){
+                if (actionId == EditorInfo.IME_NULL) {
                     intentarLogin();
                     return true;
                 }
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button btnIniciarSesionEmail = (Button)  findViewById(R.id.btnIniciarSesionEmail);
+        Button btnIniciarSesionEmail = (Button) findViewById(R.id.btnIniciarSesionEmail);
         btnIniciarSesionEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,10 +45,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         //Checkbox marcado
-        checkBoxRecordar = (CheckBox) findViewById(R.id.chkRecordar);
+        checkBoxRecordar = (CheckBox) findViewById(R.id.chkRecodar);
 
         //! El usurario ya se abria logeado
-        if(!new PreferenciaMAnager(this).isUsuarioLogedOut()){
+        if (!new PreferenciaManager(this).isUsuarioLogedOut()) {
             startHomeActivity();
 
 
@@ -55,7 +56,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-    private void intentarLogin(){
+
+    private void intentarLogin() {
         emailText.setError(null);
         passwordText.setError(null);
 
@@ -63,35 +65,35 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
 
-        boolean cancelar =  false;
+        boolean cancelar = false;
         View focusView = null;
 
-        if (!TextUtils.isEmpty(password)  && !isPasswordValido(password)){
+        if (TextUtils.isEmpty(password) || !isPasswordValido(password)) {
             passwordText.setError(getString(R.string.error_password_invalido));
             focusView = passwordText;
             cancelar = true;
 
 
         }
-        if (TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             emailText.setError(getString(R.string.error_campo_requerido));
-            focusView=emailText;
+            focusView = emailText;
             cancelar = true;
 
         } else if (!isEmailValido(email)) {
 
             emailText.setError(getString(R.string.error_email_invalido));
-            focusView=emailText;
-            cancelar=true;
+            focusView = emailText;
+            cancelar = true;
 
         }
-        if (cancelar= true){
+        if (cancelar == true) {
 
             focusView.requestFocus();
 
-        }else{
-            if(checkBoxRecordar.isChecked())
-                salvarLoginDetalles(email , password);
+        } else {
+            if (checkBoxRecordar.isChecked())
+                salvarLoginDetalles(email, password);
                 startHomeActivity();
 
 
@@ -100,22 +102,25 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void  startHomeActivity(){
+    private void startHomeActivity() {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
 
 
     }
-    private void salvarLoginDetalles(String email, String password){
-        new PreferenciaMAnager(this).salvarLoginDetalles(email,password);
+
+    private void salvarLoginDetalles(String email, String password) {
+        new PreferenciaManager(this).salvarLoginDetalles(email, password);
     }
-    private boolean isEmailValido(String email){
+
+    private boolean isEmailValido(String email) {
         return email.contains("@");
 
     }
-    private boolean isPasswordValido(String password){
-        return password.length()>4;
+
+    private boolean isPasswordValido(String password) {
+        return password.length() > 4;
 
     }
 }

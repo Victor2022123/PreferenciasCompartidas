@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">PreferenciasCompartidas</string>
+    <string name="app_name">PreferenciasCompartidas VC</string>
 
-    <string name="email">Correo Electronico</string>
+    <string name="email">Correo Electronico Vc</string>
     <string name="password">Contraseña</string>
     <string name="iniciar_sesion">Iniciar Sesion</string>
     <string name="chk_recordar">Recordar</string>

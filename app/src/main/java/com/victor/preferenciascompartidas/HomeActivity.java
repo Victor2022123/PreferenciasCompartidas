@@ -7,13 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
     private TextView dato;
-
-    //@Override
-    protected  void Oncreate(Bundle savedInstanceState){
+    @Override
+    protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        dato = findViewById(R.id.testViewUser);
-        dato.setText("Bienvenido"+new PreferenciaMAnager(this).getEmail());
+        dato = findViewById(R.id.textViewUser);
+        dato.setText("Bienvenido"+new PreferenciaManager(this).getEmail());
+        //dato.setText("Victor");
 
     }
 }
